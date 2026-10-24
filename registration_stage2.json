@@ -1,0 +1,2365 @@
+{
+  "title": "V6 Stage2a: DEV checks and prospective predictions for the reserved CONF subset",
+  "timestamp_utc": "2026-10-24T11:50:39Z",
+  "status": "READY_FOR_MANUAL_REGISTRATION_NOT_UPLOADED",
+  "background_five_lines": [
+    "Stage1 used 136 complete DEV participants (544 records) and frozen original PRRMrel B-cal readouts.",
+    "The primary deployed readout uses training z statistics and a ±3 clip; clipping affects short subrecords more strongly than full records.",
+    "The DEV decision, made before new CONF computations, assigns unclipped indices to variance/noise/agreement and clipped indices to SDS accuracy.",
+    "Stage1 showed across-record independent-error tension, while stored-position, adjacency and recorded-quality associations were not detected by the specified criteria.",
+    "Stage2a supplies DEV diagnostics and fixed numeric CONF predictions; Stage2b is locked until a manual registration receipt is supplied."
+  ],
+  "data": {
+    "dataset_people": 276,
+    "records": 1092,
+    "DEV_people": 141,
+    "DEV_complete": 136,
+    "DEV_complete_records": 544,
+    "CONF_people": 135,
+    "CONF_complete": 131,
+    "analysed_record": "130 seconds, samples1280:17920 at128Hz",
+    "split_sha256": "69ece5f8828f7296374cc82125e0294ed8eef8cd5ff772f477cd2b0b8cb9606d",
+    "position_definition": "stored session number (recording order unverified)"
+  },
+  "prior_exposure": "No new CONF features, predictions, thinning, quality variables, accuracy, intervals or statistics were computed in V5 Stage1 or V6 Stage2a. Earlier full-sample analyses already included CONF: four-record ICC, single-record r, four-record r and participant-mean thinning. Frozen fold readouts used CONF labels in training. CLEAN means the registered quantity was not previously computed full-sample; it does not mean a pristine independent holdout.",
+  "analysis_conventions": {
+    "timestamp_utc": "2026-10-24T11:47:21Z",
+    "stage": "V6 Stage2a DEV only",
+    "verified_stage1_hashes": {
+      "split_dev_conf.csv": "69ece5f8828f7296374cc82125e0294ed8eef8cd5ff772f477cd2b0b8cb9606d",
+      "configs/protocol_stage01.json": "93b128b65b4a67431c0a29db603b33e58b87bd68e26bacb91f3b13371956ef3d",
+      "configs/protocol_amendment_A1.json": "ba4cc921cffe3d7a402fbda844929efe5daef828bda7a7f8d0a9fc89a2d5569e",
+      "configs/protocol_amendment_A2.json": "2bccbb52a77f8a4292d218f57694bfd8701a3018a0c240952d45e3dc266dafd0",
+      "results/stage2_inputs.json": "f374064865efcd53821d77a3cd76a4787b5bdfc9e2bae6225d17499bd712b2e7"
+    },
+    "stage1_manifest_sha256": "52d5927f9e4c0a87db8423bbe401f39f806592800bc8594cdf2d47ad627199d9",
+    "request_sha256": "00c2032d9dbd7fe8ee99070fa48cfa0264012cbc26cb056070cfb0cc5c97bc4c",
+    "DEV_complete_n": 136,
+    "CONF_complete_n": 131,
+    "bootstrap_DEV": "exact Stage1 2000x136 matrix, seed20261024",
+    "bootstrap_CONF": {
+      "seed": 20261025,
+      "draws": 2000
+    },
+    "thinning_seed_base": 20261101,
+    "thinning_seed_index": "zero-based index within sorted complete cohort (participant,session), reset separately for each cohort",
+    "thinning_rng": "numpy default_rng PCG64, channel-major then original cached frequency-major; one uniform per event; retain u<q; q=.8 nested in q=.9; same thinned trains for both readouts",
+    "full_accuracy": "rstar: subtract the mean of each stored session position, then correlate pooled predictions with repeated SDS; recenter within each bootstrap",
+    "subrecord_accuracy": "raw pooled H1/H2, Q1-Q4, C1/C2 or H13_1/H13_2 against repeated SDS; no additional centring; equal rows per participant",
+    "quarter_ICC": "records as rows and quarters as columns; two-way consistency ICC; bootstrap people with all their records/quarters",
+    "variance_primary": "unclipped; clipped sensitivity",
+    "SDS_accuracy_primary": "clipped; unclipped sensitivity",
+    "thinning_primary": "unclipped; clipped sensitivity",
+    "prediction_SE": "sample SD (ddof1) of finite 2000 bootstrap values",
+    "prediction_interval": "DEV estimate +/- z * SE * sqrt(1+136/131); z=1.645/1.96; no clipping to admissible parameter range",
+    "numeric_pass": "CONF point estimate inside closed 95% prediction interval",
+    "categorical_pass": "registered boolean conditions or exact DEV label match; no numeric prediction interval for a category",
+    "overall": "LOOCV only; 46fold reported separately, never selects the main verdict",
+    "missing": "no imputation; exclude only observations needed by a metric, report counts; undefined estimates cannot pass",
+    "no_CONF_computation": true,
+    "no_Section_A_estimates_when_written": true,
+    "position": "stored session number (recording order unverified)"
+  },
+  "prediction_formula": {
+    "estimate": "theta_DEV",
+    "SE": "sample SD (ddof1) of2000 participant-bootstrap estimates",
+    "n_DEV": 136,
+    "n_CONF": 131,
+    "inflation": 1.4276441919929832,
+    "z90": 1.645,
+    "z95": 1.96,
+    "interval": "theta_DEV +/- z * SE * sqrt(1+136/131)",
+    "no_parameter_range_truncation": true,
+    "interpretation": "Approximate transfer prediction intervals, conditional on frozen readouts; they use the prespecified variance-inflation rule, not an independently estimated CONF variance."
+  },
+  "predictions": [
+    {
+      "ID": "P1a",
+      "kind": "numeric",
+      "statistic": "r_HH",
+      "definition": "r_HH",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.012657991838274478,
+      "SE": 0.041307950569108236,
+      "PI90": [
+        -0.08435268480980895,
+        0.1096686684863579
+      ],
+      "PI95": [
+        -0.10292919735944192,
+        0.1282451810359909
+      ],
+      "DEV_CI90": [
+        -0.055424828725596516,
+        0.0809094243625565
+      ],
+      "DEV_CI95": [
+        -0.0674831974738691,
+        0.09347053388891155
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1b",
+      "kind": "numeric",
+      "statistic": "sigma2_half",
+      "definition": "sigma2_half",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 74.89867534019768,
+      "SE": 4.416270542439119,
+      "PI90": [
+        64.5271757213468,
+        85.27017495904857
+      ],
+      "PI95": [
+        62.54114387943918,
+        87.25620680095619
+      ],
+      "DEV_CI90": [
+        67.42599610606952,
+        81.7728629516706
+      ],
+      "DEV_CI95": [
+        66.02613369141575,
+        83.38614994377582
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1c",
+      "kind": "numeric",
+      "statistic": "sigma2_quarter",
+      "definition": "sigma2_quarter",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 148.80710555977177,
+      "SE": 6.277366194424865,
+      "PI90": [
+        134.064869895716,
+        163.54934122382755
+      ],
+      "PI95": [
+        131.24188859834362,
+        166.37232252119992
+      ],
+      "DEV_CI90": [
+        138.40542093531542,
+        159.39405801763772
+      ],
+      "DEV_CI95": [
+        136.4436335513472,
+        161.44263976439905
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1d",
+      "kind": "numeric",
+      "statistic": "gamma",
+      "definition": "gamma",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.9904313084949453,
+      "SE": 0.07248385497694358,
+      "PI90": [
+        0.8202048092254937,
+        1.160657807764397
+      ],
+      "PI95": [
+        0.7876082455355987,
+        1.1932543714542918
+      ],
+      "DEV_CI90": [
+        0.87870395360975,
+        1.1146703822380513
+      ],
+      "DEV_CI95": [
+        0.8525872258797536,
+        1.1382903455789748
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1e",
+      "kind": "interval_contains",
+      "definition": "CONF gamma 90% bootstrap CI contains 1",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": "CI90 [0.87870395, 1.1146704]",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF lo90 <= 1 <= hi90",
+      "statistic": "gamma",
+      "target": 1
+    },
+    {
+      "ID": "P2a",
+      "kind": "numeric",
+      "statistic": "Delta_state",
+      "definition": "Delta_state = R_SB - ICC(C,1)",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": -0.012066633896330108,
+      "SE": 0.09122850069971587,
+      "PI90": [
+        -0.22631445932798155,
+        0.20218119153532133
+      ],
+      "PI95": [
+        -0.26734063866595736,
+        0.24320737087329714
+      ],
+      "DEV_CI90": [
+        -0.17493109282538308,
+        0.12825750513905512
+      ],
+      "DEV_CI95": [
+        -0.20641548717819552,
+        0.15462992128959413
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P2b",
+      "kind": "numeric",
+      "statistic": "S_counting",
+      "definition": "S_counting",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 1.0209721519788413,
+      "SE": 0.09699744077120492,
+      "PI90": [
+        0.793176116767547,
+        1.2487681871901355
+      ],
+      "PI95": [
+        0.7495555993866608,
+        1.2923887045710218
+      ],
+      "DEV_CI90": [
+        0.881313710952217,
+        1.202057349296659
+      ],
+      "DEV_CI95": [
+        0.8578245714685081,
+        1.2387767969284857
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P2c",
+      "kind": "interval_contains",
+      "definition": "CONF Delta_state 90% bootstrap CI contains 0",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": "CI90 [-0.17493109, 0.12825751]",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF lo90 <= 0 <= hi90",
+      "statistic": "Delta_state",
+      "target": 0
+    },
+    {
+      "ID": "P3",
+      "kind": "P3",
+      "definition": "Joint stored-position/adjacency absence criteria",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN (ICC terms PARTIALLY_KNOWN)",
+      "DEV_estimate": "All three criteria met on DEV",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "LMM p >= .01 AND ICC difference CI90 contains 0 AND lag1-minus-lag3 CI90 contains 0"
+    },
+    {
+      "ID": "P3.p",
+      "kind": "numeric",
+      "statistic": "LMM_p",
+      "definition": "Supporting P3 component: LMM_p",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.22759967498758069,
+      "SE": 0.2188144236388974,
+      "PI90": [
+        -0.28628046201065804,
+        0.7414798119858195
+      ],
+      "PI95": [
+        -0.38468304143585264,
+        0.8398823914110141
+      ],
+      "DEV_CI90": [
+        0.0008208718764629062,
+        0.7032901473932752
+      ],
+      "DEV_CI95": [
+        0.00029917887138672345,
+        0.808279036202514
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P3.ICCdiff",
+      "kind": "numeric",
+      "statistic": "ICC_difference",
+      "definition": "Supporting P3 component: ICC_difference",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.0008524835654059246,
+      "SE": 0.0030276775709844857,
+      "PI90": [
+        -0.006257940597178508,
+        0.007962907727990357
+      ],
+      "PI95": [
+        -0.007619511181503186,
+        0.009324478312315036
+      ],
+      "DEV_CI90": [
+        -0.0010052280971579045,
+        0.008849615556261646
+      ],
+      "DEV_CI95": [
+        -0.001285187287047505,
+        0.010254448858705998
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P3.lagdiff",
+      "kind": "numeric",
+      "statistic": "lag1_minus_lag3",
+      "definition": "Supporting P3 component: lag1_minus_lag3",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.05066986470545973,
+      "SE": 0.10060261858935207,
+      "PI90": [
+        -0.1855928393857152,
+        0.28693256879663465
+      ],
+      "PI95": [
+        -0.2308346337861529,
+        0.3321743631970724
+      ],
+      "DEV_CI90": [
+        -0.11530957032518892,
+        0.2105798376431949
+      ],
+      "DEV_CI95": [
+        -0.15074381486473465,
+        0.2442554198974472
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4a",
+      "kind": "numeric",
+      "statistic": "r_H_over_rstar",
+      "definition": "r_H_over_rstar",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.6324708690407409,
+      "SE": 0.0454871497475349,
+      "PI90": [
+        0.5256454488732953,
+        0.7392962892081865
+      ],
+      "PI95": [
+        0.5051895173518697,
+        0.7597522207296121
+      ],
+      "DEV_CI90": [
+        0.5524738887844888,
+        0.705111616095571
+      ],
+      "DEV_CI95": [
+        0.5344583377870156,
+        0.7169047539331868
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4b",
+      "kind": "numeric",
+      "statistic": "r_Q_over_rstar",
+      "definition": "r_Q_over_rstar",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.42713385511828106,
+      "SE": 0.03856051684166046,
+      "PI90": [
+        0.3365754570575744,
+        0.5176922531789877
+      ],
+      "PI95": [
+        0.3192344872161625,
+        0.5350332230203996
+      ],
+      "DEV_CI90": [
+        0.3624794709663432,
+        0.4868851329379241
+      ],
+      "DEV_CI95": [
+        0.34816452006252274,
+        0.4994296813885148
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4c",
+      "kind": "numeric",
+      "statistic": "r_H",
+      "definition": "r_H",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.19710167117729074,
+      "SE": 0.028181107330896446,
+      "PI90": [
+        0.13091905371025458,
+        0.2632842886443269
+      ],
+      "PI95": [
+        0.11824578653571577,
+        0.2759575558188657
+      ],
+      "DEV_CI90": [
+        0.14953331078255871,
+        0.24344243816752817
+      ],
+      "DEV_CI95": [
+        0.14095114469883546,
+        0.24990366980935425
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4d",
+      "kind": "numeric",
+      "statistic": "r_Q",
+      "definition": "r_Q",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.13311094752537753,
+      "SE": 0.020017746475941265,
+      "PI90": [
+        0.08609977645912019,
+        0.18012211859163485
+      ],
+      "PI95": [
+        0.07709763731877303,
+        0.18912425773198202
+      ],
+      "DEV_CI90": [
+        0.09953667451498165,
+        0.16636937045041553
+      ],
+      "DEV_CI95": [
+        0.09424090534290563,
+        0.17241889635914504
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.1",
+      "kind": "numeric",
+      "statistic": "mean_contact_quality_vs_record_residual2",
+      "definition": "mean_contact_quality_vs_record_residual2",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": -0.019640455620894032,
+      "SE": 0.05459618871510652,
+      "PI90": [
+        -0.14785822330699688,
+        0.10857731206520882
+      ],
+      "PI95": [
+        -0.17241056180008038,
+        0.13312965055829232
+      ],
+      "DEV_CI90": [
+        -0.11013964000843128,
+        0.07019822241891009
+      ],
+      "DEV_CI95": [
+        -0.12653910346149036,
+        0.08427738076774838
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.2",
+      "kind": "numeric",
+      "statistic": "mean_contact_quality_vs_half_difference2",
+      "definition": "mean_contact_quality_vs_half_difference2",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.01629227645053523,
+      "SE": 0.03683334946264711,
+      "PI90": [
+        -0.07020991272509822,
+        0.10279446562616867
+      ],
+      "PI95": [
+        -0.08677416171617697,
+        0.11935871461724742
+      ],
+      "DEV_CI90": [
+        -0.04561116689864341,
+        0.07783699654702035
+      ],
+      "DEV_CI95": [
+        -0.055052608045008604,
+        0.0878918496589474
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.3",
+      "kind": "numeric",
+      "statistic": "interpolated_fraction_vs_record_residual2",
+      "definition": "interpolated_fraction_vs_record_residual2",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": -0.023497842851994955,
+      "SE": 0.04642584324335237,
+      "PI90": [
+        -0.13252776094150656,
+        0.08553207523751664
+      ],
+      "PI95": [
+        -0.1534058303629024,
+        0.10641014465891248
+      ],
+      "DEV_CI90": [
+        -0.09684094543372453,
+        0.05718019089999142
+      ],
+      "DEV_CI95": [
+        -0.1119253796006364,
+        0.07251800105524557
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.4",
+      "kind": "numeric",
+      "statistic": "interpolated_fraction_vs_half_difference2",
+      "definition": "interpolated_fraction_vs_half_difference2",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.02802083216323527,
+      "SE": 0.043184022757342226,
+      "PI90": [
+        -0.07339575254646319,
+        0.12943741687293372
+      ],
+      "PI95": [
+        -0.09281594961853312,
+        0.14885761394500366
+      ],
+      "DEV_CI90": [
+        -0.04264383667611016,
+        0.0957241176814667
+      ],
+      "DEV_CI95": [
+        -0.05656158067340752,
+        0.11056071187513342
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.5",
+      "kind": "numeric",
+      "statistic": "packet_counter_gaps_vs_record_residual2",
+      "definition": "packet_counter_gaps_vs_record_residual2",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.0007733028036456868,
+      "SE": 0.04388867791075144,
+      "PI90": [
+        -0.10229814670311946,
+        0.10384475231041082
+      ],
+      "PI95": [
+        -0.12203523277888298,
+        0.12358183838617434
+      ],
+      "DEV_CI90": [
+        -0.07050813915054434,
+        0.07457004431696536
+      ],
+      "DEV_CI95": [
+        -0.08390335697525088,
+        0.0900468815014778
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.6",
+      "kind": "numeric",
+      "statistic": "packet_counter_gaps_vs_half_difference2",
+      "definition": "packet_counter_gaps_vs_half_difference2",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": -0.022243700500168523,
+      "SE": 0.036893317469083343,
+      "PI90": [
+        -0.10888672302147674,
+        0.0643993220211397
+      ],
+      "PI95": [
+        -0.1254779401000251,
+        0.08099053909968808
+      ],
+      "DEV_CI90": [
+        -0.08147670575956464,
+        0.041282004375416126
+      ],
+      "DEV_CI95": [
+        -0.08974678106392109,
+        0.053010363357293755
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.half.clipped",
+      "kind": "numeric",
+      "statistic": "D_half",
+      "definition": "D_half",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.0178224024336647,
+      "SE": 0.038246200161539776,
+      "PI90": [
+        -0.07199783085730173,
+        0.10764263572463113
+      ],
+      "PI95": [
+        -0.08919744999812507,
+        0.12484225486545447
+      ],
+      "DEV_CI90": [
+        -0.045374593182264375,
+        0.08222205718959533
+      ],
+      "DEV_CI95": [
+        -0.05749297078428472,
+        0.09422697958731231
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.quarter.clipped",
+      "kind": "numeric",
+      "statistic": "D_quarter",
+      "definition": "D_quarter",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.008955440332553683,
+      "SE": 0.016621611647332588,
+      "PI90": [
+        -0.030079994025094467,
+        0.04799087469020183
+      ],
+      "PI95": [
+        -0.03755486443400581,
+        0.05546574509911317
+      ],
+      "DEV_CI90": [
+        -0.018456797725100817,
+        0.03656767270028668
+      ],
+      "DEV_CI95": [
+        -0.024404709834368855,
+        0.04107578653717814
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.label.clipped",
+      "kind": "label",
+      "definition": "A2 within-record tension label",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": "NOT_DETECTED_WITHIN_RECORD",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A2 label equals registered DEV label",
+      "label_family": "A2",
+      "expected": "NOT_DETECTED_WITHIN_RECORD"
+    },
+    {
+      "ID": "P7.D1.clipped",
+      "kind": "numeric",
+      "statistic": "D1",
+      "definition": "D1",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.0697041045319591,
+      "SE": 0.02399837606797061,
+      "PI90": [
+        0.0133445255953549,
+        0.1260636834685633
+      ],
+      "PI95": [
+        0.002552265798983877,
+        0.13685594326493433
+      ],
+      "DEV_CI90": [
+        0.030573309149029483,
+        0.11115516320621018
+      ],
+      "DEV_CI95": [
+        0.02286424032758346,
+        0.11781719304119818
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P7.D4.clipped",
+      "kind": "numeric",
+      "statistic": "D4",
+      "definition": "D4",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.25762863438249684,
+      "SE": 0.11196535155644967,
+      "PI90": [
+        -0.00531916055736259,
+        0.5205764293223563
+      ],
+      "PI95": [
+        -0.055670865971378214,
+        0.5709281347363719
+      ],
+      "DEV_CI90": [
+        0.10218084646497583,
+        0.4682340697236303
+      ],
+      "DEV_CI95": [
+        0.07178183389086881,
+        0.5190292152046434
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q09.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p9",
+      "definition": "rstar(q=0.9) / rstar(q=1); sensitivity",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.9232861890305631,
+      "SE": 0.09229966050103254,
+      "PI90": [
+        0.7065227719103309,
+        1.1400496061507954
+      ],
+      "PI95": [
+        0.6650148835256056,
+        1.1815574945355207
+      ],
+      "DEV_CI90": [
+        0.7758655010050939,
+        1.082251488953455
+      ],
+      "DEV_CI95": [
+        0.7506762437348995,
+        1.117440538709322
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q09.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p9",
+      "definition": "r4(q=0.9) / r4(q=1); sensitivity",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.9655565798772339,
+      "SE": 0.08727649390849841,
+      "PI90": [
+        0.7605899423924989,
+        1.1705232173619688
+      ],
+      "PI95": [
+        0.7213410118103155,
+        1.209772147944152
+      ],
+      "DEV_CI90": [
+        0.8180914144198193,
+        1.104689922611742
+      ],
+      "DEV_CI95": [
+        0.79395337218599,
+        1.1447228988200888
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q08.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p8",
+      "definition": "rstar(q=0.8) / rstar(q=1); sensitivity",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.7672926534744025,
+      "SE": 0.10242659390334535,
+      "PI90": [
+        0.5267463895124985,
+        1.0078389174363063
+      ],
+      "PI95": [
+        0.48068433896660206,
+        1.053900967982203
+      ],
+      "DEV_CI90": [
+        0.6064893665876713,
+        0.9454044065408665
+      ],
+      "DEV_CI95": [
+        0.5703268000846212,
+        0.9727675209761829
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q08.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p8",
+      "definition": "r4(q=0.8) / r4(q=1); sensitivity",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.7930534343732266,
+      "SE": 0.09197432686957119,
+      "PI90": [
+        0.5770540550541833,
+        1.00905281369227
+      ],
+      "PI95": [
+        0.535692471780324,
+        1.0504143969661293
+      ],
+      "DEV_CI90": [
+        0.6377302240443113,
+        0.9438957595962781
+      ],
+      "DEV_CI95": [
+        0.6053754359317365,
+        0.9722221130033201
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.label.clipped",
+      "kind": "label",
+      "definition": "A4 counting-floor label; sensitivity",
+      "readout": "LOOCV",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": "CONSISTENT_WITH_COUNTING",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A4 label equals registered DEV label",
+      "label_family": "A4",
+      "expected": "CONSISTENT_WITH_COUNTING"
+    },
+    {
+      "ID": "P6.half.unclipped",
+      "kind": "numeric",
+      "statistic": "D_half",
+      "definition": "D_half",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.029081970170999637,
+      "SE": 0.04025527309001738,
+      "PI90": [
+        -0.0654565200545704,
+        0.12362046039656968
+      ],
+      "PI95": [
+        -0.08355963520414764,
+        0.14172357554614692
+      ],
+      "DEV_CI90": [
+        -0.037030136525568094,
+        0.09710379095802936
+      ],
+      "DEV_CI95": [
+        -0.04696294567973257,
+        0.1072725934438628
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.quarter.unclipped",
+      "kind": "numeric",
+      "statistic": "D_quarter",
+      "definition": "D_quarter",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.013263969730179487,
+      "SE": 0.01769494367746317,
+      "PI90": [
+        -0.028292157740452517,
+        0.05482009720081149
+      ],
+      "PI95": [
+        -0.03624971406461609,
+        0.06277765352497507
+      ],
+      "DEV_CI90": [
+        -0.01632168259694734,
+        0.04127829780029654
+      ],
+      "DEV_CI95": [
+        -0.02316187153500215,
+        0.04729181976916099
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.label.unclipped",
+      "kind": "label",
+      "definition": "A2 within-record tension label",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": "NOT_DETECTED_WITHIN_RECORD",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A2 label equals registered DEV label",
+      "label_family": "A2",
+      "expected": "NOT_DETECTED_WITHIN_RECORD"
+    },
+    {
+      "ID": "P7.D1.unclipped",
+      "kind": "numeric",
+      "statistic": "D1",
+      "definition": "D1",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.0683399445868906,
+      "SE": 0.023752414442671416,
+      "PI90": [
+        0.0125580003034464,
+        0.12412188887033482
+      ],
+      "PI95": [
+        0.0018763513981060187,
+        0.1348035377756752
+      ],
+      "DEV_CI90": [
+        0.03106124380756592,
+        0.10759415816392458
+      ],
+      "DEV_CI95": [
+        0.02229324756669222,
+        0.11443626118279876
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P7.D4.unclipped",
+      "kind": "numeric",
+      "statistic": "D4",
+      "definition": "D4",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.24600444765559792,
+      "SE": 0.10668269246458377,
+      "PI90": [
+        -0.004537156080326288,
+        0.49654605139152214
+      ],
+      "PI95": [
+        -0.05251320785954583,
+        0.5445221031707417
+      ],
+      "DEV_CI90": [
+        0.09987055243130961,
+        0.4388476489365348
+      ],
+      "DEV_CI95": [
+        0.06881398401984802,
+        0.4911207899882251
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q09.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p9",
+      "definition": "rstar(q=0.9) / rstar(q=1); primary",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.9147062313182248,
+      "SE": 0.08727377691924929,
+      "PI90": [
+        0.7097459746139902,
+        1.1196664880224594
+      ],
+      "PI95": [
+        0.6704982658833921,
+        1.1589141967530576
+      ],
+      "DEV_CI90": [
+        0.7748742489763693,
+        1.0645852667581954
+      ],
+      "DEV_CI95": [
+        0.7473773063429621,
+        1.0895020607757915
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q09.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p9",
+      "definition": "r4(q=0.9) / r4(q=1); primary",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.9420369453579176,
+      "SE": 0.08253903786393496,
+      "PI90": [
+        0.7481961035164394,
+        1.1358777871993957
+      ],
+      "PI95": [
+        0.7110776444404117,
+        1.1729962462754235
+      ],
+      "DEV_CI90": [
+        0.8034765215135317,
+        1.0735162231659396
+      ],
+      "DEV_CI95": [
+        0.777472778849853,
+        1.1044357244169096
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q08.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p8",
+      "definition": "rstar(q=0.8) / rstar(q=1); primary",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.7905974585503664,
+      "SE": 0.09776743280180149,
+      "PI90": [
+        0.5609931165392266,
+        1.0202018005615063
+      ],
+      "PI95": [
+        0.5170263276434763,
+        1.0641685894572566
+      ],
+      "DEV_CI90": [
+        0.6333373174279932,
+        0.9555603317843531
+      ],
+      "DEV_CI95": [
+        0.5951986457576481,
+        0.992331329459073
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q08.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p8",
+      "definition": "r4(q=0.8) / r4(q=1); primary",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.8211698204609855,
+      "SE": 0.08653887389659749,
+      "PI90": [
+        0.6179354649093365,
+        1.0244041760126346
+      ],
+      "PI95": [
+        0.579018247888808,
+        1.063321393033163
+      ],
+      "DEV_CI90": [
+        0.6757788844711633,
+        0.96437017525326
+      ],
+      "DEV_CI95": [
+        0.6442999240192774,
+        0.9877913985285979
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.label.unclipped",
+      "kind": "label",
+      "definition": "A4 counting-floor label; primary",
+      "readout": "LOOCV",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": "CONSISTENT_WITH_COUNTING",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A4 label equals registered DEV label",
+      "label_family": "A4",
+      "expected": "CONSISTENT_WITH_COUNTING"
+    },
+    {
+      "ID": "P1a",
+      "kind": "numeric",
+      "statistic": "r_HH",
+      "definition": "r_HH",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.005309061202817271,
+      "SE": 0.04171718421890912,
+      "PI90": [
+        -0.09266269031650505,
+        0.10328081272213958
+      ],
+      "PI95": [
+        -0.11142323847977953,
+        0.12204136088541406
+      ],
+      "DEV_CI90": [
+        -0.06221635238410952,
+        0.07329911726768228
+      ],
+      "DEV_CI95": [
+        -0.07420454393172222,
+        0.08596747522707941
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1b",
+      "kind": "numeric",
+      "statistic": "sigma2_half",
+      "definition": "sigma2_half",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 77.31587160707369,
+      "SE": 4.979861050581103,
+      "PI90": [
+        65.62079394104225,
+        89.01094927310513
+      ],
+      "PI95": [
+        63.381310983717086,
+        91.25043223043029
+      ],
+      "DEV_CI90": [
+        68.99556204006784,
+        85.63931914752378
+      ],
+      "DEV_CI95": [
+        67.66943356757915,
+        87.34012504105893
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1c",
+      "kind": "numeric",
+      "statistic": "sigma2_quarter",
+      "definition": "sigma2_quarter",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 149.18536069692053,
+      "SE": 6.083863368863629,
+      "PI90": [
+        134.8975615222666,
+        163.47315987157444
+      ],
+      "PI95": [
+        132.16159997818397,
+        166.20912141565708
+      ],
+      "DEV_CI90": [
+        138.96195033750863,
+        159.06836845594935
+      ],
+      "DEV_CI95": [
+        137.10453291786146,
+        161.02634998835987
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1d",
+      "kind": "numeric",
+      "statistic": "gamma",
+      "definition": "gamma",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.9482694634259687,
+      "SE": 0.07441793380971565,
+      "PI90": [
+        0.7735008289580145,
+        1.123038097893923
+      ],
+      "PI95": [
+        0.7400344946981935,
+        1.1565044321537439
+      ],
+      "DEV_CI90": [
+        0.8343459174501417,
+        1.0748189149078007
+      ],
+      "DEV_CI95": [
+        0.8137204354400421,
+        1.0963555943134244
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P1e",
+      "kind": "interval_contains",
+      "definition": "CONF gamma 90% bootstrap CI contains 1",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": "CI90 [0.83434592, 1.0748189]",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF lo90 <= 1 <= hi90",
+      "statistic": "gamma",
+      "target": 1
+    },
+    {
+      "ID": "P2a",
+      "kind": "numeric",
+      "statistic": "Delta_state",
+      "definition": "Delta_state = R_SB - ICC(C,1)",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": -0.031997190890268715,
+      "SE": 0.09107829206485735,
+      "PI90": [
+        -0.24589225514385998,
+        0.18189787336332253
+      ],
+      "PI95": [
+        -0.2868508844690157,
+        0.2228565026884783
+      ],
+      "DEV_CI90": [
+        -0.18904690007132374,
+        0.11014425023182033
+      ],
+      "DEV_CI95": [
+        -0.220194563477317,
+        0.1303711635218342
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P2b",
+      "kind": "numeric",
+      "statistic": "S_counting",
+      "definition": "S_counting",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 1.0706075950757252,
+      "SE": 0.09864110418145806,
+      "PI90": [
+        0.8389514579369923,
+        1.3022637322144581
+      ],
+      "PI95": [
+        0.7945917721019158,
+        1.3466234180495347
+      ],
+      "DEV_CI90": [
+        0.9265320911411391,
+        1.2531086829812457
+      ],
+      "DEV_CI95": [
+        0.9057538998605354,
+        1.2863131252621376
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P2c",
+      "kind": "interval_contains",
+      "definition": "CONF Delta_state 90% bootstrap CI contains 0",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": "CI90 [-0.1890469, 0.11014425]",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF lo90 <= 0 <= hi90",
+      "statistic": "Delta_state",
+      "target": 0
+    },
+    {
+      "ID": "P3",
+      "kind": "P3",
+      "definition": "Joint stored-position/adjacency absence criteria",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN (ICC terms PARTIALLY_KNOWN)",
+      "DEV_estimate": "All three criteria met on DEV",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "LMM p >= .01 AND ICC difference CI90 contains 0 AND lag1-minus-lag3 CI90 contains 0"
+    },
+    {
+      "ID": "P3.p",
+      "kind": "numeric",
+      "statistic": "LMM_p",
+      "definition": "Supporting P3 component: LMM_p",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.26350723375795027,
+      "SE": 0.23254180931013624,
+      "PI90": [
+        -0.28261132112907106,
+        0.8096257886449716
+      ],
+      "PI95": [
+        -0.38718721461807515,
+        0.9142016821339757
+      ],
+      "DEV_CI90": [
+        0.00103394755822064,
+        0.7275967500794405
+      ],
+      "DEV_CI95": [
+        0.00045753826760489404,
+        0.8397713345300165
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P3.ICCdiff",
+      "kind": "numeric",
+      "statistic": "ICC_difference",
+      "definition": "Supporting P3 component: ICC_difference",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.0006397128913807129,
+      "SE": 0.003014560212732103,
+      "PI90": [
+        -0.006439905487271883,
+        0.0077193312700333085
+      ],
+      "PI95": [
+        -0.007795577091694721,
+        0.009075002874456147
+      ],
+      "DEV_CI90": [
+        -0.001107794183634442,
+        0.008696067063333422
+      ],
+      "DEV_CI95": [
+        -0.0014051813618402458,
+        0.009812454353461187
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P3.lagdiff",
+      "kind": "numeric",
+      "statistic": "lag1_minus_lag3",
+      "definition": "Supporting P3 component: lag1_minus_lag3",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.06552998625009333,
+      "SE": 0.09845202927503827,
+      "PI90": [
+        -0.16568211325529658,
+        0.2967420857554832
+      ],
+      "PI95": [
+        -0.20995677060739248,
+        0.3410167431075791
+      ],
+      "DEV_CI90": [
+        -0.09520359420513927,
+        0.22190486832471196
+      ],
+      "DEV_CI95": [
+        -0.13241027076357753,
+        0.2496253067682577
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4a",
+      "kind": "numeric",
+      "statistic": "r_H_over_rstar",
+      "definition": "r_H_over_rstar",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.5998929894557326,
+      "SE": 0.048702052702977186,
+      "PI90": [
+        0.4855174510478867,
+        0.7142685278635784
+      ],
+      "PI95": [
+        0.4636157522038311,
+        0.736170226707634
+      ],
+      "DEV_CI90": [
+        0.5144305387632669,
+        0.6760859335946409
+      ],
+      "DEV_CI95": [
+        0.49463367367436545,
+        0.6893159146108772
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4b",
+      "kind": "numeric",
+      "statistic": "r_Q_over_rstar",
+      "definition": "r_Q_over_rstar",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.40605593970513937,
+      "SE": 0.03915380093752406,
+      "PI90": [
+        0.3141042289578596,
+        0.4980076504524191
+      ],
+      "PI95": [
+        0.2964964545594443,
+        0.5156154248508344
+      ],
+      "DEV_CI90": [
+        0.3409342540963788,
+        0.46808850150587145
+      ],
+      "DEV_CI95": [
+        0.3260140461691615,
+        0.48191241245305066
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4c",
+      "kind": "numeric",
+      "statistic": "r_H",
+      "definition": "r_H",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.18430252482962795,
+      "SE": 0.028933515297892634,
+      "PI90": [
+        0.11635289629116152,
+        0.25225215336809437
+      ],
+      "PI95": [
+        0.10334126529443391,
+        0.265263784364822
+      ],
+      "DEV_CI90": [
+        0.13702599043392452,
+        0.23142905565345906
+      ],
+      "DEV_CI95": [
+        0.12710749327047302,
+        0.24062521267130546
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P4d",
+      "kind": "numeric",
+      "statistic": "r_Q",
+      "definition": "r_Q",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.12475080760257286,
+      "SE": 0.019663922412244773,
+      "PI90": [
+        0.07857058339668194,
+        0.17093103180846378
+      ],
+      "PI95": [
+        0.06972756174023473,
+        0.179774053464911
+      ],
+      "DEV_CI90": [
+        0.09283393187666364,
+        0.1575775248429044
+      ],
+      "DEV_CI95": [
+        0.08719084016696532,
+        0.16377617641762052
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.1",
+      "kind": "numeric",
+      "statistic": "mean_contact_quality_vs_record_residual2",
+      "definition": "mean_contact_quality_vs_record_residual2",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": -0.028889520545239356,
+      "SE": 0.054500040313314235,
+      "PI90": [
+        -0.15688148614268868,
+        0.09910244505220997
+      ],
+      "PI95": [
+        -0.18139058593794494,
+        0.12361154484746623
+      ],
+      "DEV_CI90": [
+        -0.11664799278791206,
+        0.05920362647759834
+      ],
+      "DEV_CI95": [
+        -0.1328521318030846,
+        0.07858250904280865
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.2",
+      "kind": "numeric",
+      "statistic": "mean_contact_quality_vs_half_difference2",
+      "definition": "mean_contact_quality_vs_half_difference2",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.04489077388701849,
+      "SE": 0.03538552130883419,
+      "PI90": [
+        -0.03821122750547728,
+        0.12799277527951425
+      ],
+      "PI95": [
+        -0.054124376708295625,
+        0.1439059244823326
+      ],
+      "DEV_CI90": [
+        -0.012419504863290822,
+        0.10258933803716636
+      ],
+      "DEV_CI95": [
+        -0.02245667772482839,
+        0.11363582811598442
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.3",
+      "kind": "numeric",
+      "statistic": "interpolated_fraction_vs_record_residual2",
+      "definition": "interpolated_fraction_vs_record_residual2",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": -0.01660673360931563,
+      "SE": 0.04926460009981636,
+      "PI90": [
+        -0.13230340034384247,
+        0.0990899331252112
+      ],
+      "PI95": [
+        -0.1544580812079008,
+        0.12124461398926953
+      ],
+      "DEV_CI90": [
+        -0.09578653728127116,
+        0.06410431895027212
+      ],
+      "DEV_CI95": [
+        -0.11112730265155331,
+        0.07774971217904593
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.4",
+      "kind": "numeric",
+      "statistic": "interpolated_fraction_vs_half_difference2",
+      "definition": "interpolated_fraction_vs_half_difference2",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.005806076282751166,
+      "SE": 0.04273470676127968,
+      "PI90": [
+        -0.09455530117976346,
+        0.10616745374526579
+      ],
+      "PI95": [
+        -0.11377343728960668,
+        0.125385589855109
+      ],
+      "DEV_CI90": [
+        -0.06804943361968321,
+        0.07276949187211232
+      ],
+      "DEV_CI95": [
+        -0.07921493041768886,
+        0.08711952705669691
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.5",
+      "kind": "numeric",
+      "statistic": "packet_counter_gaps_vs_record_residual2",
+      "definition": "packet_counter_gaps_vs_record_residual2",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.01563836246943076,
+      "SE": 0.04414423067255727,
+      "PI90": [
+        -0.08803324623188445,
+        0.11930997117074597
+      ],
+      "PI95": [
+        -0.10788525640873203,
+        0.13916198134759356
+      ],
+      "DEV_CI90": [
+        -0.05549132189196843,
+        0.08836035222342775
+      ],
+      "DEV_CI95": [
+        -0.06977969581495802,
+        0.10099536369091296
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P5.6",
+      "kind": "numeric",
+      "statistic": "packet_counter_gaps_vs_half_difference2",
+      "definition": "packet_counter_gaps_vs_half_difference2",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": -0.03957113275111934,
+      "SE": 0.03634834820300182,
+      "PI90": [
+        -0.1249343087410309,
+        0.04579204323879221
+      ],
+      "PI95": [
+        -0.14128044882420543,
+        0.06213818332196676
+      ],
+      "DEV_CI90": [
+        -0.09897423965466581,
+        0.02249161704910919
+      ],
+      "DEV_CI95": [
+        -0.10920907694638479,
+        0.03296608014733817
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.half.clipped",
+      "kind": "numeric",
+      "statistic": "D_half",
+      "definition": "D_half",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.02850648100469,
+      "SE": 0.03667867623877193,
+      "PI90": [
+        -0.05763246201855039,
+        0.11464542402793039
+      ],
+      "PI95": [
+        -0.07412715323576663,
+        0.13114011524514663
+      ],
+      "DEV_CI90": [
+        -0.03122525526183907,
+        0.09018542673013924
+      ],
+      "DEV_CI95": [
+        -0.04317775863568915,
+        0.10057923210744783
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.quarter.clipped",
+      "kind": "numeric",
+      "statistic": "D_quarter",
+      "definition": "D_quarter",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.012553588682419629,
+      "SE": 0.016310489333943096,
+      "PI90": [
+        -0.025751182794925682,
+        0.05085836015976494
+      ],
+      "PI95": [
+        -0.0330861390352684,
+        0.058193316400107664
+      ],
+      "DEV_CI90": [
+        -0.013639636526717139,
+        0.03953385105160213
+      ],
+      "DEV_CI95": [
+        -0.0187341887342641,
+        0.04437283492701661
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.label.clipped",
+      "kind": "label",
+      "definition": "A2 within-record tension label",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "CLEAN",
+      "DEV_estimate": "NOT_DETECTED_WITHIN_RECORD",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A2 label equals registered DEV label",
+      "label_family": "A2",
+      "expected": "NOT_DETECTED_WITHIN_RECORD"
+    },
+    {
+      "ID": "P7.D1.clipped",
+      "kind": "numeric",
+      "statistic": "D1",
+      "definition": "D1",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.05348101084920202,
+      "SE": 0.025221407686135535,
+      "PI90": [
+        -0.005750826894860651,
+        0.11271284859326469
+      ],
+      "PI95": [
+        -0.017093093696915203,
+        0.12405511539531924
+      ],
+      "DEV_CI90": [
+        0.013788381527855628,
+        0.09614262121315445
+      ],
+      "DEV_CI95": [
+        0.006985460775807715,
+        0.10507410780235767
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P7.D4.clipped",
+      "kind": "numeric",
+      "statistic": "D4",
+      "definition": "D4",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.1905409016770517,
+      "SE": 0.10821356673222866,
+      "PI90": [
+        -0.06359592153893148,
+        0.4446777248930349
+      ],
+      "PI95": [
+        -0.11226041960156655,
+        0.49334222295567
+      ],
+      "DEV_CI90": [
+        0.046207810052542105,
+        0.39448505295474745
+      ],
+      "DEV_CI95": [
+        0.02161021099178939,
+        0.4462148065792419
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q09.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p9",
+      "definition": "rstar(q=0.9) / rstar(q=1); sensitivity",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.9119697753743087,
+      "SE": 0.09528907006895987,
+      "PI90": [
+        0.6881858055283315,
+        1.1357537452202857
+      ],
+      "PI95": [
+        0.6453335559833573,
+        1.17860599476526
+      ],
+      "DEV_CI90": [
+        0.7647186927793708,
+        1.0741012891524069
+      ],
+      "DEV_CI95": [
+        0.7348597707191651,
+        1.1108007630671544
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q09.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p9",
+      "definition": "r4(q=0.9) / r4(q=1); sensitivity",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.968222631060702,
+      "SE": 0.09356318004361551,
+      "PI90": [
+        0.7484918702670289,
+        1.1879533918543752
+      ],
+      "PI95": [
+        0.7064157671363256,
+        1.2300294949850785
+      ],
+      "DEV_CI90": [
+        0.8178665745466405,
+        1.1212930681876638
+      ],
+      "DEV_CI95": [
+        0.7868155564165371,
+        1.1603794549781465
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q08.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p8",
+      "definition": "rstar(q=0.8) / rstar(q=1); sensitivity",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.8004549078698479,
+      "SE": 0.10964515975385465,
+      "PI90": [
+        0.5429560246678514,
+        1.0579537910718444
+      ],
+      "PI95": [
+        0.4936477278844904,
+        1.1072620878552053
+      ],
+      "DEV_CI90": [
+        0.6256822893878995,
+        0.985941576015834
+      ],
+      "DEV_CI95": [
+        0.5931979274987319,
+        1.0373288229307722
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q08.clipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p8",
+      "definition": "r4(q=0.8) / r4(q=1); sensitivity",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.8413856091613708,
+      "SE": 0.0971031418466302,
+      "PI90": [
+        0.6133413376491184,
+        1.0694298806736233
+      ],
+      "PI95": [
+        0.5696732856574105,
+        1.1130979326653312
+      ],
+      "DEV_CI90": [
+        0.6818046057142495,
+        1.0000825818038819
+      ],
+      "DEV_CI95": [
+        0.6543538385682807,
+        1.038526725422656
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.label.clipped",
+      "kind": "label",
+      "definition": "A4 counting-floor label; sensitivity",
+      "readout": "46fold",
+      "variant": "clipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": "CONSISTENT_WITH_COUNTING",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A4 label equals registered DEV label",
+      "label_family": "A4",
+      "expected": "CONSISTENT_WITH_COUNTING"
+    },
+    {
+      "ID": "P6.half.unclipped",
+      "kind": "numeric",
+      "statistic": "D_half",
+      "definition": "D_half",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.030980619306059002,
+      "SE": 0.039845994735914145,
+      "PI90": [
+        -0.06259669106134928,
+        0.12455792967346728
+      ],
+      "PI95": [
+        -0.08051575049340619,
+        0.1424769891055242
+      ],
+      "DEV_CI90": [
+        -0.03398845856523242,
+        0.09683374632799287
+      ],
+      "DEV_CI95": [
+        -0.04510235662557069,
+        0.10827204844254847
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.quarter.unclipped",
+      "kind": "numeric",
+      "statistic": "D_quarter",
+      "definition": "D_quarter",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": 0.007478247187217957,
+      "SE": 0.0171156452111772,
+      "PI90": [
+        -0.03271741249400921,
+        0.04767390686844512
+      ],
+      "PI95": [
+        -0.04041445370956335,
+        0.05537094808399926
+      ],
+      "DEV_CI90": [
+        -0.021511280476341342,
+        0.035469904188198086
+      ],
+      "DEV_CI95": [
+        -0.025862570694604202,
+        0.0398669636020311
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P6.label.unclipped",
+      "kind": "label",
+      "definition": "A2 within-record tension label",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "CLEAN",
+      "DEV_estimate": "NOT_DETECTED_WITHIN_RECORD",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A2 label equals registered DEV label",
+      "label_family": "A2",
+      "expected": "NOT_DETECTED_WITHIN_RECORD"
+    },
+    {
+      "ID": "P7.D1.unclipped",
+      "kind": "numeric",
+      "statistic": "D1",
+      "definition": "D1",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.056332924702618026,
+      "SE": 0.024759143389900876,
+      "PI90": [
+        -0.0018132970389525965,
+        0.11447914644418865
+      ],
+      "PI95": [
+        -0.012947679925636335,
+        0.1256135293308724
+      ],
+      "DEV_CI90": [
+        0.016722644822485613,
+        0.0977134418595453
+      ],
+      "DEV_CI95": [
+        0.008060888811308198,
+        0.10767918019187461
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P7.D4.unclipped",
+      "kind": "numeric",
+      "statistic": "D4",
+      "definition": "D4",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.1998192352042871,
+      "SE": 0.1071744764298329,
+      "PI90": [
+        -0.051877310729838894,
+        0.45151578113841306
+      ],
+      "PI95": [
+        -0.1000745216533949,
+        0.49971299206196906
+      ],
+      "DEV_CI90": [
+        0.05249654836255222,
+        0.40178017378369946
+      ],
+      "DEV_CI95": [
+        0.02480816792501352,
+        0.46041988982453474
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q09.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p9",
+      "definition": "rstar(q=0.9) / rstar(q=1); primary",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.9112103915679562,
+      "SE": 0.09038949996930064,
+      "PI90": [
+        0.6989329381214666,
+        1.1234878450144459
+      ],
+      "PI95": [
+        0.6582840640572452,
+        1.1641367190786673
+      ],
+      "DEV_CI90": [
+        0.7697009386681511,
+        1.065015480117213
+      ],
+      "DEV_CI95": [
+        0.7407498489662477,
+        1.0893923071213492
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q09.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p9",
+      "definition": "r4(q=0.9) / r4(q=1); primary",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.9500141944485394,
+      "SE": 0.08742694963565764,
+      "PI90": [
+        0.7446942154957285,
+        1.1553341734013503
+      ],
+      "PI95": [
+        0.7053776237813605,
+        1.1946507651157183
+      ],
+      "DEV_CI90": [
+        0.8007422731201761,
+        1.0884942266023694
+      ],
+      "DEV_CI95": [
+        0.774961128839963,
+        1.1207685909480216
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.rstar.q08.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_rstar_0p8",
+      "definition": "rstar(q=0.8) / rstar(q=1); primary",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.8277088470033622,
+      "SE": 0.10554080424668068,
+      "PI90": [
+        0.579848938852648,
+        1.0755687551540765
+      ],
+      "PI95": [
+        0.5323864032493199,
+        1.1230312907574045
+      ],
+      "DEV_CI90": [
+        0.658355444947664,
+        1.0031419240307828
+      ],
+      "DEV_CI95": [
+        0.6234144722805834,
+        1.054083474957368
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.r4.q08.unclipped",
+      "kind": "numeric",
+      "statistic": "thin_ratio_r4_0p8",
+      "definition": "r4(q=0.8) / r4(q=1); primary",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": 0.8653863010492696,
+      "SE": 0.09094472196412079,
+      "PI90": [
+        0.6518049227973775,
+        1.0789676793011618
+      ],
+      "PI95": [
+        0.6109063610044618,
+        1.1198662410940774
+      ],
+      "DEV_CI90": [
+        0.7154718395679619,
+        1.0152380779495946
+      ],
+      "DEV_CI95": [
+        0.6821772624886263,
+        1.04552711854627
+      ],
+      "pass_rule": "CONF estimate lies inside the closed 95% prediction interval",
+      "bootstrap_valid": 2000
+    },
+    {
+      "ID": "P8.label.unclipped",
+      "kind": "label",
+      "definition": "A4 counting-floor label; primary",
+      "readout": "46fold",
+      "variant": "unclipped",
+      "tag": "PARTIALLY_KNOWN",
+      "DEV_estimate": "CONSISTENT_WITH_COUNTING",
+      "SE": null,
+      "PI90": null,
+      "PI95": null,
+      "pass_rule": "CONF A4 label equals registered DEV label",
+      "label_family": "A4",
+      "expected": "CONSISTENT_WITH_COUNTING"
+    }
+  ],
+  "label_rules": {
+    "A2": "WITHIN_RECORD_NONINDEPENDENCE if the95% lower bound of D_half or D_quarter is>0; otherwise NOT_DETECTED_WITHIN_RECORD",
+    "A4": "For each index separately: STEEPER_THAN_COUNTING if any95% upper bound of r(q)/r(1) is below q, across q=.9,.8 and rstar,r4; otherwise CONSISTENT_WITH_COUNTING. Unclipped is primary.",
+    "A2_prespecified_interpretation": "A detected label is the prespecified diagnostic for within-record dependence in disjoint event subsets, placing tension within event detection/feature construction rather than requiring state differences between records. This rule alone does not establish a unique causal mechanism.",
+    "counting_floor_assumption": "The supplied counting-floor model assumes the linear readout, expected features scaled by q, and counting noise unchanged in absolute units. Failure to reject this inequality does not establish the model."
+  },
+  "verdict_rules": {
+    "primary_readout": "LOOCV",
+    "BUDGET_CONFIRMED": "At least3 of P1a-P1d pass AND P1e AND P2c AND P4a AND P4b pass",
+    "BUDGET_NOT_CONFIRMED": "At most2 of P1a-P1d pass",
+    "BUDGET_PARTIAL": "All other cases",
+    "outside_verdict": "P3 and P5-P8; P2a and P2b also do not enter the specified verdict; 46-fold scored separately without changing primary verdict"
+  },
+  "frozen_code_sha256": {
+    "src/stage2b_score.py": "a0958f212cb6e6d7f66912526ee8b5ebe4ee60214e583fd8ec18b999fba09154",
+    "src/common.py": "9d614cb5ec4ef4d04ce763162c0c22533521d0c86974edb900008d262613043e",
+    "src/inference.py": "235f4f3af672efa40ec914e45baaf8ee55863ab9651fde6c290ce20d26ec002f",
+    "src/analysis.py": "a7c6987d8147089f0f11d527e5b1ef861832ddc239bc7774474e0a8205f29c35",
+    "src/a2_features.py": "088180188bc5c6f6af78940b0534e1e49ae340db52e85e8fc54aea2c97057546",
+    "src/stage1_math.py": "f32f51a4ee8d242aac751544dd3156b09abf4439aeb9611bb730467d1bdecadc"
+  },
+  "stage2b_script_sha256": "a0958f212cb6e6d7f66912526ee8b5ebe4ee60214e583fd8ec18b999fba09154",
+  "stage1_hashes": {
+    "split_dev_conf.csv": "69ece5f8828f7296374cc82125e0294ed8eef8cd5ff772f477cd2b0b8cb9606d",
+    "configs/protocol_stage01.json": "93b128b65b4a67431c0a29db603b33e58b87bd68e26bacb91f3b13371956ef3d",
+    "configs/protocol_amendment_A1.json": "ba4cc921cffe3d7a402fbda844929efe5daef828bda7a7f8d0a9fc89a2d5569e",
+    "configs/protocol_amendment_A2.json": "2bccbb52a77f8a4292d218f57694bfd8701a3018a0c240952d45e3dc266dafd0",
+    "results/stage2_inputs.json": "f374064865efcd53821d77a3cd76a4787b5bdfc9e2bae6225d17499bd712b2e7"
+  },
+  "stage2a_protocol_sha256": "1e247513581b6ff25117b48c010128d0815dc78656e3f79fc32c5f7c41ec0248",
+  "bootstrap_DEV_sha256": "09de7a6285e10964f32c86303f200cba460911e6698cd2e32008c2833879dd81",
+  "bootstrap_CONF": {
+    "seed": 20261025,
+    "replicates": 2000,
+    "n": 131
+  },
+  "thinning_seeds_DEV_sha256": "c09b2ff680644d69d33203bfba6c4e42865b98e8a27acb4a192472b745e33e31",
+  "receipt_policy": "REGISTRATION_RECEIPT.txt must contain an https:// or http:// URL and ISO8601 timestamp with timezone; script refuses missing/invalid/future receipt. No receipt is created by Stage2a.",
+  "receipt_sha256": null,
+  "receipt_status": "ABSENT: no registration has occurred; SHA256 will be recorded by Stage2b after a receipt exists",
+  "run_commands": {
+    "DEV": "caffeinate -i /Users/alexson/Desktop/eeg_individual_error/.venv/bin/python src/stage2b_score.py --cohort DEV",
+    "CONF_after_manual_receipt": "caffeinate -i /Users/alexson/Desktop/eeg_individual_error/.venv/bin/python src/stage2b_score.py --cohort CONF"
+  },
+  "limitations": [
+    "DEV is half of a heavily explored cohort; one visit and one SDS per person.",
+    "Recording order is unverified; no confirmed temporal or state interpretation.",
+    "Intervals resample people only; one fixed thinning realization per record and q is conditioned upon.",
+    "No multiple-testing adjustment or equivalence test is added; failure to detect is not proof of zero.",
+    "Full rstar is position-centred; pooled subrecord accuracy is uncentred, as fixed before computations.",
+    "The scorer checks registration bytes and hashes of every executable dependency; software/environment versions are recorded separately."
+  ]
+}
